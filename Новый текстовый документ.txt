@@ -1,0 +1,26 @@
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main()
+        {
+            Console.WriteLine("Введите поискомые символы: ");
+            string firstString = Console.ReadLine();
+            
+            Console.WriteLine("Введите строку в которой нужно найти ранее введеные символы: ");
+            string secondString = Console.ReadLine();
+
+            var lettersSet = new HashSet<char>(firstString);
+
+            int count = 0;
+            foreach (char letter in secondString)
+            {
+                if (lettersSet.Contains(letter))
+                {
+                    count++;
+                }
+            }
+            Console.WriteLine($"Общее количество найденных букв: {count}");
+        }
+    }
+}
