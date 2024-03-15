@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+
+class RomanToArabicConverter
+{
+    private static Dictionary<char, int> romanMap = new Dictionary<char, int>()
+    {
+        {'I', 1},
+        {'V', 5},
+        {'X', 10},
+        {'L', 50},
+        {'C', 100},
+        {'D', 500},
+        {'M', 1000}
+    };
+
+    public static int ConvertRomanToArabic(string romanNumber)
+    {
+        int result = 0;
+        int previousValue = 0;
+
+        for (int i = romanNumber.Length - 1; i >= 0; i--)
+        {
+            int value = romanMap[romanNumber[i]];
+
+            if (value < previousValue)
+            {
+                result -= value;
+            }
+            else
+            {
+                result += value;
+            }
+
+            previousValue = value;
+        }
+
+        return result;
+    }
+
+    static void Main()
+    {
+        string romanNumber;
+        
+        while (true)
+        {
+            Console.WriteLine("Введите римское число для конвертации в арабское (введите 0 для выхода):");
+            romanNumber = Console.ReadLine().ToUpper();
+
+            if (romanNumber == "0")
+            {
+                break;
+            }
+
+            int arabicNumber = ConvertRomanToArabic(romanNumber);
+            Console.WriteLine($"Арабское представление римского числа {romanNumber} = {arabicNumber}");
+        }
+    }
+}
