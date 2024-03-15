@@ -1,0 +1,61 @@
+using System;
+
+class Train
+{
+    public string Destination { get; set; }
+    public int TrainNumber { get; set; }
+    public DateTime DepartureTime { get; set; }
+
+    public void DisplayTrainInfo()
+    {
+        Console.WriteLine("Информация (Train Information):");
+        Console.WriteLine("Пункт назначения (Destination): " + Destination);
+        Console.WriteLine("Номер поезда (Train Number): " + TrainNumber);
+        Console.WriteLine("Время отправления (Departure Time): " + DepartureTime.ToString("HH:mm"));
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Train[] trains = new Train[4];
+        
+        trains[0] = new Train { Destination = "Москва (Moscow)", TrainNumber = 101, DepartureTime = new DateTime(2024, 6, 15, 8, 0, 0) };
+        trains[1] = new Train { Destination = "Санкт-Петербург (St. Petersburg)", TrainNumber = 202, DepartureTime = new DateTime(2024, 6, 15, 10, 30, 0) };
+        trains[2] = new Train { Destination = "Казань (Kazan)", TrainNumber = 303, DepartureTime = new DateTime(2024, 6, 15, 12, 45, 0) };
+        trains[3] = new Train { Destination = "Новосибирск (Novosibirsk)", TrainNumber = 404, DepartureTime = new DateTime(2024, 6, 16, 23, 15, 0) };
+
+        bool trainFound = false;
+        int inputTrainNumber;
+
+        do
+        {
+            Console.Write("Введите номер поезда, или 0 для выхода. (Enter the train number to get information, or 0 to exit.): ");
+            inputTrainNumber = int.Parse(Console.ReadLine());
+
+            if (inputTrainNumber == 0)
+            {
+                break;
+            }
+
+            foreach (Train train in trains)
+            {
+                if (train.TrainNumber == inputTrainNumber)
+                {
+                    train.DisplayTrainInfo();
+                    trainFound = true;
+                    break;
+                }
+            }
+
+            if (!trainFound)
+            {
+                Console.WriteLine("Данного номера поезда не существует. (Train with the provided number not found.)");
+            }
+
+            trainFound = false;
+
+        } while (true);
+    }
+}

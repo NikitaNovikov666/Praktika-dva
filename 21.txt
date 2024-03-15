@@ -1,0 +1,69 @@
+using System;
+
+class Student
+{
+    public string LastName { get; set; }
+    public DateTime DateOfBirth { get; set; }
+    public string GroupNumber { get; set; }
+    public int[] Grades { get; set; }
+
+    public void UpdateLastName(string newLastName)
+    {
+        LastName = newLastName;
+    }
+
+    public void UpdateDateOfBirth(DateTime newDateOfBirth)
+    {
+        DateOfBirth = newDateOfBirth;
+    }
+
+    public void UpdateGroupNumber(string newGroupNumber)
+    {
+        GroupNumber = newGroupNumber;
+    }
+
+    public void DisplayStudentInfo()
+    {
+        Console.WriteLine("Информация о студенте: ");
+        Console.WriteLine("Фамилия: " + LastName);
+        Console.WriteLine("Дата рождения: " + DateOfBirth.ToShortDateString());
+        Console.WriteLine("Номер группы: " + GroupNumber);
+        Console.WriteLine("Оценки:  ");
+        foreach (int grade in Grades)
+        {
+            Console.Write(grade + " ");
+        }
+        Console.WriteLine();
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Student student = new Student();
+        student.LastName = "Соболев";
+        student.DateOfBirth = new DateTime(1983, 2, 25);
+        student.GroupNumber = "666";
+        student.Grades = new int[] { 5, 5, 5, 4, 4 };
+
+        student.DisplayStudentInfo();
+
+        Console.WriteLine("Введите новую фамилию:");
+        string newLastName = Console.ReadLine();
+
+        student.UpdateLastName(newLastName);
+
+        Console.WriteLine("Введите новую дату рождения (гг.мм.дд):");
+        DateTime newDateOfBirth = DateTime.Parse(Console.ReadLine());
+
+        student.UpdateDateOfBirth(newDateOfBirth);
+
+        Console.WriteLine("Введите новый номер группы: ");
+        string newGroupNumber = Console.ReadLine();
+
+        student.UpdateGroupNumber(newGroupNumber);
+
+        student.DisplayStudentInfo();
+    }
+}

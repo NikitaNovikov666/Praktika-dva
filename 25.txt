@@ -1,0 +1,65 @@
+using System;
+
+class MyClass : IDisposable
+{
+    public int Number { get; set; }
+    public string Text { get; set; }
+    private bool disposed = false;
+    
+    public MyClass(int number, string text)
+    {
+        Number = number;
+        Text = text;
+    }
+    
+    public MyClass()
+    {
+        Number = 0;
+        Text = "Default";
+    }
+    
+    ~MyClass()
+    {
+        Dispose(false);
+    }
+    
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!disposed)
+        {
+            if (disposing)
+            {
+                Console.WriteLine("Освобождение ресурсов объекта MyClass.");
+            }
+            
+            Console.WriteLine("Освобождение неуправляемых ресурсов объекта MyClass.");
+
+            disposed = true;
+        }
+    }
+    
+    public void DisplayInfo()
+    {
+        Console.WriteLine($"Number: {Number}");
+        Console.WriteLine($"Text: {Text}");
+    }
+
+    public static void Main(string[] args)
+    {
+        using (MyClass myObject = new MyClass(42, "Hello"))
+        {
+            myObject.DisplayInfo();
+        }
+        
+        using (MyClass newObject = new MyClass())
+        {
+            newObject.DisplayInfo();
+        }
+    }
+}

@@ -1,0 +1,79 @@
+using System;
+
+class Calculator
+{
+    private int currentValue;
+
+    public Calculator()
+    {
+        currentValue = 0; // начальное значение по умолчанию
+    }
+
+    public Calculator(int startValue)
+    {
+        currentValue = startValue; // произвольное начальное значение
+    }
+
+    public void Increment()
+    {
+        currentValue++;
+    }
+
+    public void Decrement()
+    {
+        currentValue--;
+    }
+
+    public int CurrentValue
+    {
+        get { return currentValue; }
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Хотите ли вы ввести произвольное начальное число? (yep/no)");
+        string choice = Console.ReadLine();
+
+        Calculator calculator;
+
+        if (choice.ToLower() == "yep")
+        {
+            Console.WriteLine("Введите начальное число:");
+            int startValue = Convert.ToInt32(Console.ReadLine());
+            calculator = new Calculator(startValue);
+        }
+        else
+        {
+            calculator = new Calculator();
+        }
+
+        int option;
+        do
+        {
+            Console.WriteLine("Выберите действие: 1 - увеличить, 2 - уменьшить, 0 - выход");
+            option = Convert.ToInt32(Console.ReadLine());
+
+            switch (option)
+            {
+                case 1:
+                    calculator.Increment();
+                    Console.WriteLine("Текущее значение: " + calculator.CurrentValue);
+                    break;
+                case 2:
+                    calculator.Decrement();
+                    Console.WriteLine("Текущее значение: " + calculator.CurrentValue);
+                    break;
+                case 0:
+                    Console.WriteLine("Выход из программы.");
+                    break;
+                default:
+                    Console.WriteLine("Некорректный выбор. Повторите попытку.");
+                    break;
+            }
+
+        } while (option != 0);
+    }
+}
