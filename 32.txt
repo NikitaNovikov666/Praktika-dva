@@ -1,0 +1,62 @@
+using System;
+
+class Worker
+{
+    private string name;
+    private string surname;
+    private double rate;
+    private int days;
+
+    public Worker(string name, string surname, double rate, int days)
+    {
+        this.name = name;
+        this.surname = surname;
+        this.rate = rate;
+        this.days = days;
+    }
+
+    public string GetName()
+    {
+        return name;
+    }
+
+    public string GetSurname()
+    {
+        return surname;
+    }
+
+    public double GetRate()
+    {
+        return rate;
+    }
+
+    public int GetDays()
+    {
+        return days;
+    }
+
+    public void GetSalary()
+    {
+        double salary = rate * days;
+        Console.WriteLine($"Зарплата работника {name} {surname} составляет: {salary}");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Worker worker1 = new Worker("Наталья", "Морская-Пехота", 50.0, 20);
+        worker1.GetSalary();
+        Worker worker2 = new Worker("Гарик", "Харламов", 45.0, 25);
+        worker2.GetSalary();
+        
+        Console.WriteLine($"Имя работника: {worker1.GetName()}");
+        Console.WriteLine($"Фамилия работника: {worker1.GetSurname()}");
+        Console.WriteLine($"Ставка работника: {worker1.GetRate()}, Отработанные дни: {worker1.GetDays()}");
+        
+        Console.WriteLine($"Имя работника: {worker2.GetName()}");
+        Console.WriteLine($"Фамилия работника: {worker2.GetSurname()}");
+        Console.WriteLine($"Ставка работника: {worker2.GetRate()}, Отработанные дни: {worker2.GetDays()}");
+    }
+}
